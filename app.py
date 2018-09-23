@@ -63,8 +63,6 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat adit'))
     if text=="mail":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat mail'))
-    if text=="djohan":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat djohan'))
     if text=="tria":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat tria'))
 
