@@ -68,28 +68,28 @@ def inputmhs(nrp, nama, jurusan):
         return 'Data gagal dimasukkan\n'
 
 def allmhs():
-    r = requests.post("http://www.aditmasih.tk/api_aisyah/all.php")
-    data = r.json()
+        r = requests.post("http://www.aditmasih.tk/api_aisyah/all.php")
+        data = r.json()
 
-    flag = data['flag']
-   
-    if(flag == "1"):
-        hasil = ""
-        for i in range(0,len(data['data_sel'])):
-            nrp = data['data_sel'][int(i)][0]
-            nama = data['data_sel'][int(i)][2]
-            jurusan = data['data_sel'][int(i)][4]
-            hasil=hasil+str(i+1)
-            hasil=hasil+".\nNrp : "
-            hasil=hasil+nrp
-            hasil=hasil+"\nNama : "
-            hasil=hasil+nama
-            hasil=hasil+"\nJurusan : "
-            hasil=hasil+jurusan
-            hasil=hasil+"\n"
-        return hasil
-    elif(flag == "0"):
-        return 'Data gagal dimasukkan\n'
+        flag = data['flag']
+       
+        if(flag == "1"):
+            hasil = ""
+            for i in range(0,len(data['data_sel'])):
+                nrp = data['data_sel'][int(i)][0]
+                nama = data['data_sel'][int(i)][2]
+                jurusan = data['data_sel'][int(i)][4]
+                hasil=hasil+str(i+1)
+                hasil=hasil+".\nNrp : "
+                hasil=hasil+nrp
+                hasil=hasil+"\nNama : "
+                hasil=hasil+nama
+                hasil=hasil+"\nJurusan : "
+                hasil=hasil+jurusan
+                hasil=hasil+"\n"
+            return hasil
+        elif(flag == "0"):
+            return 'Data gagal dimasukkan\n'
 
 #DELETE DATA MHS
 def hapusmhs(nrp):
