@@ -56,8 +56,8 @@ def callback():
         abort(400)
     return 'OK'
 
-def inputmhs(nrp, nama, jur):
-    r = requests.post("http://www.aditmasih.tk/api_aisyah/insert.php", data={'nrp': nrp, 'nama': nama, 'jur': jur})
+def inputmhs(nrp, nama, jurusan):
+    r = requests.post("http://www.aditmasih.tk/api_aisyah/insert.php", data={'nrp': nrp, 'nama': nama, 'jurusan': jurusan})
     data = r.json()
 
     flag = data['flag']
