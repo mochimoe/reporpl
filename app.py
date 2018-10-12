@@ -93,7 +93,7 @@ def allmhs():
 
 #DELETE DATA MHS
 def hapusmhs(nrp):
-    r = requests.post("http://www.aditmasih.tk/api_hafid/delete.php", data={'nrp': nrp})
+    r = requests.post("http://www.aditmasih.tk/api_aisyah/delete.php", data={'nrp': nrp})
     data = r.json()
 
     flag = data['flag']
@@ -109,17 +109,21 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-    data = text.split('-')
 
-    if text=="Menu":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Masukkan tambah NRP, NAMA, dan JURUSAN Selingkuhanmu untuk menambahkan data'))  
-
-    if(data[0]=='tambah'):
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
+    data=text.split('-')
+    if(data[0]=='lihat'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
+    elif(data[0]=='tambah'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
     elif(data[0]=='hapus'):
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
-    elif(data[0]=='waifuku'):
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
+    elif(data[0]=='ganti'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
+    elif(data[0]=='semwa'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+    elif(data[0]=='menu'):
+        menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[jurusan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[jurusan baru]\n5. waifuku"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 
 
 import os
