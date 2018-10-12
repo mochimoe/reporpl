@@ -110,15 +110,15 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
 
-if text=="Menu":
+    if text=="Menu":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Masukkan tambah NRP, NAMA, dan JURUSAN Selingkuhanmu untuk menambahkan data'))  
 
-if(data[0]=='tambah'):
-line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
-elif(data[0]=='hapus'):
-line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
-elif(data[0]=='waifuku'):
-line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+    if(data[0]=='tambah'):
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
+    elif(data[0]=='hapus'):
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
+    elif(data[0]=='waifuku'):
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
 
 
 import os
