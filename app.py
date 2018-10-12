@@ -120,7 +120,7 @@ def handle_message(event):
     elif(data[0]=='ganti'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
     elif(data[0]=='waifuku'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allmhs()))
     elif(data[0]=='menu'):
         menu = "Ketikkan sesuai format di bawah ini\n\n 1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[jurusan]\n3. hapus-[nrp] Untuk menghapus selingkuhan anda.\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[jurusan baru] jika anda ingin mengganti selingkuhan anda.\n5. waifuku , untuk menampilkan seluruh selingkuhan anda"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
