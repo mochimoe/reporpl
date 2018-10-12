@@ -85,7 +85,7 @@ def allmhs():
                 hasil=hasil+"\nNama : "
                 hasil=hasil+nama
                 hasil=hasil+"\nJurusan : "
-                hasil=hasil+jur
+                hasil=hasil+jurusan
                 hasil=hasil+"\n"
             return hasil
         elif(flag == "0"):
@@ -119,7 +119,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
     elif(data[0]=='ganti'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
-    elif(data[0]=='semwa'):
+    elif(data[0]=='waifuku'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
     elif(data[0]=='menu'):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[jurusan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[jurusan baru]\n5. waifuku"
