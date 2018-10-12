@@ -57,7 +57,7 @@ def callback():
     return 'OK'
 
 def inputmhs(nrp, nama, jurusan):
-    r = requests.post("http://www.aditmasih.tk/api_aisyah/insert.php", data={'nrp': nrp, 'nama': nama, 'jurusan': jurusan})
+    r = requests.post("http://www.aditmasih.tk/api_aisyah/insert.php", data={'nrp': nrp, 'nama': nama, 'jurusan': jur})
     data = r.json()
 
     flag = data['flag']
@@ -85,7 +85,7 @@ def allmhs():
                 hasil=hasil+"\nNama : "
                 hasil=hasil+nama
                 hasil=hasil+"\nJurusan : "
-                hasil=hasil+jurusan
+                hasil=hasil+jur
                 hasil=hasil+"\n"
             return hasil
         elif(flag == "0"):
