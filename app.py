@@ -43,6 +43,23 @@ handler = WebhookHandler('7d787028825e0a82de4c61310da0c826')
 #===========[ NOTE SAVER ]=======================
 notes = {}
 
+def carimhs(nrp):
+    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrp
+    r = requests.get(URLmhs)
+    data = r.json()
+    err = "data tidak ditemukan"
+    
+    flag = data['flag']
+        if(flag == "1"):
+            nrp = data['data_sel'][0]['nrp']
+            nama = data['data_sel'][0]['nama']
+            jurusan = data['data_sel'][0]['jurusan']
+            data= "Nama : "+nama+"\nNrp : "+nrp+"\nJurusan : "+jurusan
+
+            return data
+
+        elif(flag == "0"):
+            return err
 
 #input data
 def inputmhs(nrp, nama, jurusan):
@@ -79,24 +96,18 @@ def allmhs():
             return hasil
         elif(flag == "0"):
             return 'Data gagal dimasukkan\n'
-
-def carimhs(nrp):
-    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrp
-    r = requests.get(URLmhs)
+            
+#DELETE DATA MHS
+def hapusmhs(nrp):
+    r = requests.post("http://www.aditmasih.tk/api_aisyah/delete.php", data={'nrp': nrp})
     data = r.json()
-    err = "data tidak ditemukan"
-    
+
     flag = data['flag']
-        if(flag == "1"):
-            nrp = data['data_sel'][0]['nrp']
-            nama = data['data_sel'][0]['nama']
-            jurusan = data['data_sel'][0]['jurusan']
-            data= "Nama : "+nama+"\nNrp : "+nrp+"\nJurusan : "+jurusan
-
-            return data
-
-        elif(flag == "0"):
-            return err
+   
+    if(flag == "1"):
+        return 'Data '+nrp+' berhasil dihapus\n'
+    elif(flag == "0"):
+        return 'Data gagal dihapus\n'
 
 def updatemhs(nrpLama,nrp,nama,jurusan):
     URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
@@ -118,17 +129,7 @@ def updatemhs(nrpLama,nrp,nama,jurusan):
         elif(flag == "0"):
             return err
 
-#DELETE DATA MHS
-def hapusmhs(nrp):
-    r = requests.post("http://www.aditmasih.tk/api_aisyah/delete.php", data={'nrp': nrp})
-    data = r.json()
 
-    flag = data['flag']
-   
-    if(flag == "1"):
-        return 'Data '+nrp+' berhasil dihapus\n'
-    elif(flag == "0"):
-        return 'Data gagal dihapus\n'
 
 # Post Request
 
