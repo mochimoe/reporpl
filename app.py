@@ -109,25 +109,25 @@ def hapusmhs(nrp):
     elif(flag == "0"):
         return 'Data gagal dihapus\n'
 
-def updatemhs(nrpLama,nrp,nama,jurusan):
-    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
-    r = requests.get(URLmhs)
-    data = r.json()
-    err = "data tidak ditemukan"
-    nrp_lama = nrpLama
-    flag = data['flag']
-        if(flag == "1"):
-            r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama,'jurusan': jurusan, 'nrp_lama':nrp_lama})
-            data = r.json()
-            flag = data['flag']
+# def updatemhs(nrpLama,nrp,nama,jurusan):
+#     URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
+#     r = requests.get(URLmhs)
+#     data = r.json()
+#     err = "data tidak ditemukan"
+#     nrp_lama = nrpLama
+#     flag = data['flag']
+#         if(flag == "1"):
+#             r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama,'jurusan': jurusan, 'nrp_lama':nrp_lama})
+#             data = r.json()
+#             flag = data['flag']
 
-        if(flag == "1"):
-            return 'Data '+nrp_lama+'berhasil diupdate\n'
-        elif(flag == "0"):
-            return 'Data gagal diupdate\n'
+#         if(flag == "1"):
+#             return 'Data '+nrp_lama+'berhasil diupdate\n'
+#         elif(flag == "0"):
+#             return 'Data gagal diupdate\n'
 
-        elif(flag == "0"):
-            return err
+#         elif(flag == "0"):
+#             return err
 
 
 
