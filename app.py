@@ -79,6 +79,7 @@ def allmhs():
                 nrp = data['data_sel'][int(i)][0]
                 nama = data['data_sel'][int(i)][2]
                 jurusan = data['data_sel'][int(i)][4]
+                print("Berikut Ini Adalah List Dari Selingkuhanmu")
                 hasil=hasil+str(i+1)
                 hasil=hasil+".\nNrp : "
                 hasil=hasil+nrp
@@ -90,6 +91,32 @@ def allmhs():
             return hasil
         elif(flag == "0"):
             return 'Data gagal dimasukkan\n'
+
+def carimhs(nrp):
+    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrp
+    r = requests.get(URLmhs)
+    data = r.json()
+    err = "data tidak ditemukan"
+
+def updatemhs(nrpLama,nrp,nama,jurusan):
+    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
+    r = requests.get(URLmhs)
+    data = r.json()
+    err = "data tidak ditemukan"
+    nrp_lama=nrpLama
+    flag = data['flag']
+        if(flag == "1"):
+            r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama'jurusan': kosan, 'nrp_lama':nrp_lama})
+            data = r.json()
+            flag = data['flag']
+
+        if(flag == "1"):
+            return 'Data '+nrp_lama+'berhasil diupdate\n'
+        elif(flag == "0"):
+            return 'Data gagal diupdate\n'
+
+        elif(flag == "0"):
+            return err
 
 #DELETE DATA MHS
 def hapusmhs(nrp):
@@ -122,7 +149,7 @@ def handle_message(event):
     elif(data[0]=='waifuku'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allmhs()))
     elif(data[0]=='menu'):
-        menu = "Ketikkan sesuai format di bawah ini\n\n 1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[jurusan]\n3. hapus-[nrp] Untuk menghapus selingkuhan anda.\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[jurusan baru] jika anda ingin mengganti selingkuhan anda.\n5. waifuku , untuk menampilkan seluruh selingkuhan anda"
+        menu = "Ketikkan sesuai format di bawah ini\n\n 1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[jurusan]\n3. hapus-[nrp] Untuk menghapus selingkuhan anda.\n4. ganti-[nrp lama]-[nrp baru]-[nama]-[jurusan baru] jika anda ingin mengganti selingkuhan anda.\n5. waifuku , untuk menampilkan seluruh selingkuhan anda"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 
 
