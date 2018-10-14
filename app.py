@@ -88,6 +88,7 @@ def allmhs():
                 nrp = data['data_sel'][int(i)][0]
                 nama = data['data_sel'][int(i)][2]
                 jurusan = data['data_sel'][int(i)][4]
+                print("List Selingkuhan Anda :\n")
                 hasil=hasil+str(i+1)
                 hasil=hasil+". Nrp : "
                 hasil=hasil+nrp
@@ -125,7 +126,7 @@ def updatemhs(nrpLama,nrp,nama,jurusan):
         flag = data['flag']
 
         if(flag == "1"):
-            return 'Data '+nrp_lama+'berhasil diupdate\n'
+            return 'Data '+nrp_lama+' berhasil diupdate\n'
         elif(flag == "0"):
             return 'Data gagal diupdate\n'
 
