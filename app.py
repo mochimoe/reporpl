@@ -43,18 +43,7 @@ handler = WebhookHandler('7d787028825e0a82de4c61310da0c826')
 #===========[ NOTE SAVER ]=======================
 notes = {}
 
-# Post Request
 
-@app.route("/callback", methods=['POST'])
-def callback():
-    signature = request.headers['X-Line-Signature']
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
-    return 'OK'
 
 def inputmhs(nrp, nama, jurusan):
     r = requests.post("http://www.aditmasih.tk/api_aisyah/insert.php", data={'nrp': nrp, 'nama': nama, 'jurusan': jurusan})
@@ -93,7 +82,7 @@ def allmhs():
 
 def carimhs(nrp):
     URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrp
-    r = requests.get(URLmhs)
+    r = requests.get(URLadmin)
     data = r.json()
     err = "data tidak ditemukan"
     
@@ -102,9 +91,6 @@ def carimhs(nrp):
         nrp = data['data_sel'][0]['nrp']
         nama = data['data_sel'][0]['nama']
         jurusan = data['data_sel'][0]['jurusan']
-
-        # munculin semua, ga rapi, ada 'u' nya
-        # all_data = data['data_angkatan'][0]
         data= "Nama : "+nama+"\nNrp : "+nrp+"\nJurusan : "+jurusan
         return data
         # return all_data
@@ -114,10 +100,10 @@ def carimhs(nrp):
 
 def updatemhs(nrpLama,nrp,nama,jurusan):
     URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
-    r = requests.get(URLmhs)
+    r = requests.get(URLadmin)
     data = r.json()
     err = "data tidak ditemukan"
-    nrp_lama=nrpLama
+    nrp_lama = nrpLama
     flag = data['flag']
         if(flag == "1"):
             r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama,'jurusan': jurusan, 'nrp_lama':nrp_lama})
@@ -143,6 +129,19 @@ def hapusmhs(nrp):
         return 'Data '+nrp+' berhasil dihapus\n'
     elif(flag == "0"):
         return 'Data gagal dihapus\n'
+
+# Post Request
+
+@app.route("/callback", methods=['POST'])
+def callback():
+    signature = request.headers['X-Line-Signature']
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+    return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
