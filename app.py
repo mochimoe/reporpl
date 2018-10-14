@@ -79,9 +79,8 @@ def allmhs():
                 nrp = data['data_sel'][int(i)][0]
                 nama = data['data_sel'][int(i)][2]
                 jurusan = data['data_sel'][int(i)][4]
-                print("Berikut Ini Adalah List Dari Selingkuhanmu")
                 hasil=hasil+str(i+1)
-                hasil=hasil+".\nNrp : "
+                hasil=hasil+". Nrp : "
                 hasil=hasil+nrp
                 hasil=hasil+"\nNama : "
                 hasil=hasil+nama
@@ -100,9 +99,9 @@ def carimhs(nrp):
     
     flag = data['flag']
     if(flag == "1"):
-        nrp = data['data_angkatan'][0]['nrp']
-        nama = data['data_angkatan'][0]['nama']
-        jurusan = data['data_angkatan'][0]['jurusan']
+        nrp = data['data_sel'][0]['nrp']
+        nama = data['data_sel'][0]['nama']
+        jurusan = data['data_sel'][0]['jurusan']
 
         # munculin semua, ga rapi, ada 'u' nya
         # all_data = data['data_angkatan'][0]
