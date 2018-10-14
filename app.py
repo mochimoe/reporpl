@@ -81,8 +81,8 @@ def allmhs():
             return 'Data gagal dimasukkan\n'
 
 def carimhs(nrp):
-    # URLmhs = 
-    r = requests.post("http://www.aditmasih.tk/api_aisyah/show.php", data={'nrp': nrp})
+    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrp
+    r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
     
@@ -99,8 +99,8 @@ def carimhs(nrp):
             return err
 
 def updatemhs(nrpLama,nrp,nama,jurusan):
-    # URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
-    r = requests.post("http://www.aditmasih.tk/api_aisyah/show.php", data={'nrp': nrpLama})
+    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
+    r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
     nrp_lama = nrpLama
