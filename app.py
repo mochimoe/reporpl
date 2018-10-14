@@ -97,6 +97,21 @@ def carimhs(nrp):
     r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
+    
+    flag = data['flag']
+    if(flag == "1"):
+        nrp = data['data_angkatan'][0]['nrp']
+        nama = data['data_angkatan'][0]['nama']
+        jurusan = data['data_angkatan'][0]['jurusan']
+
+        # munculin semua, ga rapi, ada 'u' nya
+        # all_data = data['data_angkatan'][0]
+        data= "Nama : "+nama+"\nNrp : "+nrp+"\nJurusan : "+jurusan
+        return data
+        # return all_data
+
+    elif(flag == "0"):
+        return err
 
 def updatemhs(nrpLama,nrp,nama,jurusan):
     URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
@@ -106,7 +121,7 @@ def updatemhs(nrpLama,nrp,nama,jurusan):
     nrp_lama=nrpLama
     flag = data['flag']
         if(flag == "1"):
-            r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama'jurusan': kosan, 'nrp_lama':nrp_lama})
+            r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama,'jurusan': jurusan, 'nrp_lama':nrp_lama})
             data = r.json()
             flag = data['flag']
 
