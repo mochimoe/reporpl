@@ -43,21 +43,22 @@ handler = WebhookHandler('7d787028825e0a82de4c61310da0c826')
 #===========[ NOTE SAVER ]=======================
 notes = {}
 
-def carimhs(nrp):
-    URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrp
+def saldo(nrp):
+    URLmhs = "http://www.aditmasih.tk/api_aisyah/saldo.php"
     r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
 
     flag = data['flag']
     if(flag == "1"):
-        nrp = data['data_sel'][0]['nrp']
-        nama = data['data_sel'][0]['nama']
-        masuk = data['data_sel'][0]['masuk']
+        
+        # nama = data['data_sel'][0]['nama']
+        # masuk = data['data_sel'][0]['masuk']
 
     # munculin semua, ga rapi, ada 'u' nya
     # all_data = data['data_angkatan'][0]
-        data = "Nama : "+nama+"\nNrp : "+nrp+"\nmasuk : "+masuk
+        saldo = data['data_sel'][0]
+        data = "Saldo anda saat iniadalah : "+saldo+'\n'
         return data
     # return all_data
 
@@ -154,8 +155,8 @@ def handle_message(event):
     profile = line_bot_api.get_profile(sender)
 
     data=text.split('-')
-    if(data[0]=='lihat'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
+    if(data[0]=='saldo'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=saldo(data[1])))
     elif(data[0]=='tambah'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputuang(data[1],data[2],data[3])))
     elif(data[0]=='hapus'):
