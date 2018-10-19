@@ -53,11 +53,11 @@ def carimhs(nrp):
     if(flag == "1"):
         nrp = data['data_sel'][0]['nrp']
         nama = data['data_sel'][0]['nama']
-        jurusan = data['data_sel'][0]['jurusan']
+        masuk = data['data_sel'][0]['masuk']
 
     # munculin semua, ga rapi, ada 'u' nya
     # all_data = data['data_angkatan'][0]
-        data = "Nama : "+nama+"\nNrp : "+nrp+"\nJurusan : "+jurusan
+        data = "Nama : "+nama+"\nNrp : "+nrp+"\nmasuk : "+masuk
         return data
     # return all_data
 
@@ -65,16 +65,16 @@ def carimhs(nrp):
         return err
 
 #input data
-def inputmhs(nrp, nama, jurusan):
-    r = requests.post("http://www.aditmasih.tk/api_aisyah/insert.php", data={'nrp': nrp, 'nama': nama, 'jurusan': jurusan})
+def inputuang(nrp, nama, masuk):
+    r = requests.post("http://www.aditmasih.tk/api_aisyah/insert.php", data={'nrp': nrp, 'nama': nama, 'masuk': masuk})
     data = r.json()
 
     flag = data['flag']
    
     if(flag == "1"):
-        return 'Data '+nama+' berhasil dimasukkan\n'
+        return 'Uang sudah dimasukkan ke dalam tabungan :D'
     elif(flag == "0"):
-        return 'Data gagal dimasukkan\n'
+        return 'Uang gagal dimasukkan\n'
 
 def allmhs():
         r = requests.post("http://www.aditmasih.tk/api_aisyah/all.php")
@@ -87,15 +87,15 @@ def allmhs():
             for i in range(0,len(data['data_sel'])):
                 nrp = data['data_sel'][int(i)][0]
                 nama = data['data_sel'][int(i)][2]
-                jurusan = data['data_sel'][int(i)][4]
-                print("List Selingkuhan Anda :\n")
+                masuk = data['data_sel'][int(i)][4]
+
                 hasil=hasil+str(i+1)
                 hasil=hasil+". Nrp : "
                 hasil=hasil+nrp
                 hasil=hasil+"\nNama : "
                 hasil=hasil+nama
-                hasil=hasil+"\nJurusan : "
-                hasil=hasil+jurusan
+                hasil=hasil+"\nUang : "
+                hasil=hasil+masuk
                 hasil=hasil+"\n\n"
             return hasil
         elif(flag == "0"):
@@ -113,7 +113,7 @@ def hapusmhs(nrp):
     elif(flag == "0"):
         return 'Data gagal dihapus\n'
 
-def updatemhs(nrpLama,nrp,nama,jurusan):
+def updatemhs(nrpLama,nrp,nama,masuk):
     URLmhs = "http://www.aditmasih.tk/api_aisyah/show.php?nrp=" + nrpLama
     r = requests.get(URLmhs)
     data = r.json()
@@ -121,7 +121,7 @@ def updatemhs(nrpLama,nrp,nama,jurusan):
     nrp_lama = nrpLama
     flag = data['flag']
     if(flag == "1"):
-        r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama,'jurusan': jurusan, 'nrp_lama':nrp_lama})
+        r = requests.post("http://www.aditmasih.tk/api_aisyah/update.php", data={'nrp': nrp, 'nama': nama,'masuk': masuk, 'nrp_lama':nrp_lama})
         data = r.json()
         flag = data['flag']
 
@@ -157,15 +157,15 @@ def handle_message(event):
     if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
     elif(data[0]=='tambah'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputuang(data[1],data[2],data[3])))
     elif(data[0]=='hapus'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
     elif(data[0]=='ganti'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
-    elif(data[0]=='waifuku'):
+    elif(data[0]=='uangku'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allmhs()))
     elif(data[0]=='menu'):
-        menu = "Ketikkan sesuai format di bawah ini\n\n 1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[jurusan]\n3. hapus-[nrp] Untuk menghapus selingkuhan anda.\n4. ganti-[nrp lama]-[nrp baru]-[nama]-[jurusan] jika anda ingin mengganti selingkuhan anda.\n5. waifuku , untuk menampilkan seluruh selingkuhan anda"
+        menu = "Ketikkan sesuai format di bawah ini\n\n 1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[uang masuk]\n3. hapus-[nrp] Untuk menghapus uang dari catatan anda.\n4. ganti-[nrp lama]-[nrp baru]-[nama]-[masuk] jika anda ingin mengganti selingkuhan anda.\n5. uangku , untuk menampilkan seluruh tabungan anda"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 
 
