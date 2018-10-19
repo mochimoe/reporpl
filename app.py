@@ -37,13 +37,13 @@ from linebot.models import (
 app = Flask(__name__)
 
 # Channel Access Token
-line_bot_api = LineBotApi('1URSFws7hTE4/3R5QWTFuYrMqU3x9fgkiL3y9AlHJcgb3X2j8WYZLhEXxQr2Taoczii6D3zHnWfsyRiiC6XqY9GRf79yRNkqz/c/oB/zsYFe+wzmbg6X9FUi/zGtVc0b/XJL2EnJ8ToGAl1XbC5fawdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('tTJPhQw5bMtRmYbrUWYPwxcqY6U2NyCxkVLPocX/hGZF+SuZt4idRIvXxXYa9GkN41Ok4ummQWUAQ1kIbb6pNvJjuKdHvbq/VxpZFsP73Sp8G8dW18ZDmEzUkJfg7VYo1WxGvSliuGsHTEnBKSRJwQdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
-handler = WebhookHandler('7d787028825e0a82de4c61310da0c826')
+handler = WebhookHandler('7ad6255242a16b933bf3cf50b3340099')
 #===========[ NOTE SAVER ]=======================
 notes = {}
 
-def saldo(nrp):
+def saldo(  ):
     URLmhs = "http://www.aditmasih.tk/api_aisyah/saldo.php"
     r = requests.get(URLmhs)
     data = r.json()
@@ -58,7 +58,7 @@ def saldo(nrp):
     # munculin semua, ga rapi, ada 'u' nya
     # all_data = data['data_angkatan'][0]
         saldo = data['data_sel'][0]
-        data = "Saldo anda saat iniadalah : "+saldo+'\n'
+        data = "Saldo anda saat ini adalah : "+saldo+'\n'
         return data
     # return all_data
 
@@ -156,7 +156,7 @@ def handle_message(event):
 
     data=text.split('-')
     if(data[0]=='saldo'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=saldo(data[1])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=saldo()))
     elif(data[0]=='tambah'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputuang(data[1],data[2],data[3])))
     elif(data[0]=='hapus'):
