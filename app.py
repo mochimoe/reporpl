@@ -91,7 +91,7 @@ def allmhs():
                 masuk = data['data_sel'][int(i)][4]
 
                 hasil=hasil+str(i+1)
-                hasil=hasil+". Nrp : "
+                hasil=hasil+". Tanggal : "
                 hasil=hasil+nrp
                 hasil=hasil+"\nNama : "
                 hasil=hasil+nama
