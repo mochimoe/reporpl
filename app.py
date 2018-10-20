@@ -165,8 +165,11 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
     elif(data[0]=='uangku'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allmhs()))
+    elif(data[0]=='intro'):
+        menu = "Selamat Datang di Piggy Bank ChatBot\n\nbot ini membantumu untuk bisa menghitung uang yang\nsudah kamu masukkan kedalam celenganmu ^_^\n Ketik menu untuk melanjutkan"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
     elif(data[0]=='menu'):
-        menu = "Ketikkan sesuai format di bawah ini\n\n 1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[uang masuk]\n3. hapus-[nrp] Untuk menghapus uang dari catatan anda.\n4. ganti-[nrp lama]-[nrp baru]-[nama]-[masuk] jika anda ingin mengganti selingkuhan anda.\n5. uangku , untuk menampilkan seluruh tabungan anda"
+        menu = "Ketikkan sesuai format di bawah ini\n\n 1. saldo, untuk melihat saldo terkini anda\n2. tambah-[tanggal]-[nama]-[uang masuk] untuk memasukkan uang anda kedalam celengan\n5. uangku , untuk menampilkan seluruh tabungan anda"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 
 
